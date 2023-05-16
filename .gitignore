@@ -2,6 +2,7 @@
 **/.terraform/*
 .terraform.lock.hcl
 
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
@@ -35,5 +36,6 @@ override.tf.json
 terraform.rc
 
 terraform.auto.tfvars
+terraform.tf
 
 *.lock

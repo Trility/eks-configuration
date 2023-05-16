@@ -27,9 +27,15 @@ resource "aws_iam_policy_attachment" "ebs_csi" {
   roles      = [aws_iam_role.eks_ebs_csi.name]
 }
 
+data "aws_eks_addon_version" "latest" {
+  addon_name = "aws-ebs-csi-driver"
+  kubernetes_version = data.aws_eks_cluster.cluster.version
+  most_recent = true
+}
+
 resource "aws_eks_addon" "ebs_csi" {
   cluster_name             = var.cluster_name
   addon_name               = "aws-ebs-csi-driver"
-  addon_version            = "v1.10.0-eksbuild.1"
+  addon_version = data.aws_eks_addon_version.latest.version
   service_account_role_arn = aws_iam_role.eks_ebs_csi.arn
 }

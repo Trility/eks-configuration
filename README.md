@@ -24,6 +24,7 @@
  - aws_region - tested in us-west-2
  - cluster_name - User's choice
  - external_dns_version - helm search repo external-dns
+ - fluent_bit_version - helm search repo eks
  - hosted_zone_id - Private DNS Hosted Zone in Route53
  - openid_arn - ARN for EKS Cluster
  - openid_url - URL for EKS Cluster

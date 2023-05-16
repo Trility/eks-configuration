@@ -46,7 +46,7 @@ resource "helm_release" "fluent_bit" {
   namespace  = "kube-system"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-for-fluent-bit"
-  version    = "0.1.17"
+  version    = var.fluent_bit_version
 
   set {
     name  = "serviceAccount.create"
@@ -54,33 +54,18 @@ resource "helm_release" "fluent_bit" {
   }
 
   set {
-    name  = "cloudWatch.region"
+    name  = "cloudWatchLogs.region"
     value = var.aws_region
   }
 
   set {
-    name  = "cloudWatch.logGroupName"
+    name  = "cloudWatchLogs.logGroupName"
     value = "/aws/eks/${var.cluster_name}/fluentbit-cloudwatch/logs"
   }
 
   set {
-    name  = "cloudWatch.logKey"
+    name  = "cloudWatchLogs.logKey"
     value = "log"
-  }
-
-  set {
-    name  = "firehose.enabled"
-    value = "false"
-  }
-
-  set {
-    name  = "kinesis.enabled"
-    value = "false"
-  }
-
-  set {
-    name  = "elasticsearch.enabled"
-    value = "false"
   }
 
   depends_on = [
